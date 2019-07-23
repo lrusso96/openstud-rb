@@ -1,8 +1,13 @@
 # Openstud
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/openstud`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://travis-ci.com/lrusso96/openstud-rb.svg?branch=master)](https://travis-ci.com/lrusso96/openstud-rb)
+[![codecov](https://img.shields.io/codecov/c/github/lrusso96/openstud-rb.svg)](https://codecov.io/gh/lrusso96/openstud-rb)
 
-TODO: Delete this and the text above, and describe your gem
+
+[![CodeFactor](https://www.codefactor.io/repository/github/lrusso96/openstud-rb/badge)](https://www.codefactor.io/repository/github/lrusso96/openstud-rb)
+![License: GPL v3](https://img.shields.io/badge/License-MIT-blue.svg)
+
+A Ruby gem for [Opesntud](https://github.com/LithiumSR/openstud_driver).
 
 ## Installation
 
@@ -18,11 +23,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openstud
+    $ gem install openstud-rb
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO
 
 ## Development
 
@@ -32,7 +37,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/openstud.
+Bug reports and pull requests are welcome on GitHub at https://github.com/lrusso96/openstud-rb.
 
 ## License
 
