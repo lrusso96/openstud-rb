@@ -7,7 +7,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/lrusso96/openstud-rb/badge)](https://www.codefactor.io/repository/github/lrusso96/openstud-rb)
 ![License: GPL v3](https://img.shields.io/badge/License-MIT-blue.svg)
 
-A Ruby gem for [Opesntud](https://github.com/LithiumSR/openstud_driver).
+A Ruby gem for [Openstud](https://github.com/LithiumSR/openstud_driver).
 
 ## Installation
 
