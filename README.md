@@ -27,7 +27,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+```ruby
+os = Openstud::Base.new student_id: id, password: pwd
+
+os.login
+```
 
 ## Development
 
