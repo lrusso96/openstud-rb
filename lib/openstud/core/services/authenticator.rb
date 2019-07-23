@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require 'json'
+require 'httparty'
+
 module Openstud
   module Authenticator
-    require 'json'
-    require 'httparty'
+    include Exceptions
 
     def login
       params = { key: 'r4g4zz3tt1', matricola: @studentID,
@@ -21,9 +23,9 @@ module Openstud
     def handle_login_errors(res)
       x = res['esito']['flagEsito']
       return if x.zero?
-      raise StandardError, 'Invalid credentials when refreshing token' if x == -4
-      raise StandardError, 'Password expired' if x == -2
-      raise StandardError, 'Invalid credentials when refreshing token' if x == -1
+      raise RefreshError, 'Invalid credentials when refreshing token' if x == -4
+      raise RefreshError.new('Password expired').expired_password! if x == -2
+      raise RefreshError, 'Invalid credentials when refreshing token' if x == -1
 
       raise StandardError, 'Infostud is not working as intended'
     end
