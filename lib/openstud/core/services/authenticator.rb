@@ -8,7 +8,7 @@ module Openstud
     include Exceptions
 
     def login
-      params = { key: 'r4g4zz3tt1', matricola: @studentID,
+      params = { key: 'r4g4zz3tt1', matricola: @student_id,
                  stringaAutenticazione: @password }
       headers = { 'Content-EventType' => 'application/x-www-form-urlencoded',
                   Accept: 'application/json' }
@@ -27,7 +27,7 @@ module Openstud
       raise RefreshError.new('Password expired').expired_password! if x == -2
       raise RefreshError, 'Invalid credentials when refreshing token' if x == -1
 
-      raise StandardError, 'Infostud is not working as intended'
+      raise InvalidResponseError, 'Infostud is not working as intended'
     end
   end
 end
