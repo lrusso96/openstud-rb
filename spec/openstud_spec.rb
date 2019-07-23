@@ -14,7 +14,7 @@ RSpec.describe Openstud do
   end
 
   it 'raises RefreshException for invalid credentials' do
-    base = Openstud::Base.new student_id: 1234567, password: 'password'
-    expect { base.login }.to raise_error(Openstud::Exceptions::RefreshError)
+    base = Openstud::Base.new student_id: '1234567', password: 'password'
+    expect { base.login }.to raise_error Openstud::Exceptions::RefreshError
   end
 end
