@@ -23,5 +23,8 @@ module Openstud
 
     require_relative './exceptions/base_login_error.rb'
     require_relative './exceptions/refresh_error.rb'
+
+    require_relative './exceptions/base_response_error.rb'
+    require_relative './exceptions/invalid_response_error.rb'
   end
 end
