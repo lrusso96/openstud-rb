@@ -32,9 +32,8 @@ module Openstud
 
     # @param [Hash] response
     def validate_info_student!(response)
-      unless response.key? 'ritorno'
-        raise InvalidResponseError, 'Infostud response is not valid.'\
-                                    'I guess the token is no longer valid'
+      unless response.key?('ritorno')
+        raise InvalidResponseError, 'I guess the token is no longer valid'
       end
     end
   end
