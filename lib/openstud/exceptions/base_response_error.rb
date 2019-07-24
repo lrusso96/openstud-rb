@@ -2,6 +2,7 @@
 
 module Openstud
   module Exceptions
+    # @abstract
     class BaseResponseError < BaseError
 
       def initialize(msg)

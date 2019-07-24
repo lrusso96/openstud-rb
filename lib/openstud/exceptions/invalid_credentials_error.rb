@@ -2,8 +2,8 @@
 
 module Openstud
   module Exceptions
-    # class for invalid response
-    class InvalidResponseError < BaseResponseError
+    # class for invalid refresh
+    class InvalidCredentialsError < BaseLoginError
       def initialize(msg)
         super(msg)
       end
