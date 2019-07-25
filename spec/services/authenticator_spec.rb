@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Authenticator' do
+
   context 'for valid credentials' do
+    it 'logins' do
+      base = Openstud::Base.new
+      base.student_id =ENV['STUDENT_ID']
+      base.password = ENV['STUDENT_PWD']
+      base.login!
+      expect(base.token.empty?).to be false
+    end
     it 'get infos' do
       base = Openstud::Base.new
       base.student_id = ENV['STUDENT_ID']
@@ -16,7 +24,7 @@ RSpec.describe 'Authenticator' do
       expect { base.login! }.to raise_error Openstud::Exceptions::RefreshError
     end
 
-    it 'fails to geti infos' do
+    it 'fails to get infos' do
       base = Openstud::Base.new student_id: '1234567', password: 'password'
       expect { base.info_student! }
         .to raise_error Openstud::Exceptions::InvalidCredentialsError
