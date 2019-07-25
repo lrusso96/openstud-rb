@@ -1,10 +1,9 @@
 # Openstud
 
 [![Build Status](https://travis-ci.com/lrusso96/openstud-rb.svg?branch=master)](https://travis-ci.com/lrusso96/openstud-rb)
-[![codecov](https://img.shields.io/codecov/c/github/lrusso96/openstud-rb.svg)](https://codecov.io/gh/lrusso96/openstud-rb)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
-
-[![CodeFactor](https://www.codefactor.io/repository/github/lrusso96/openstud-rb/badge)](https://www.codefactor.io/repository/github/lrusso96/openstud-rb)
 ![License: GPL v3](https://img.shields.io/badge/License-MIT-blue.svg)
 
 A Ruby gem for [Openstud](https://github.com/LithiumSR/openstud_driver).
