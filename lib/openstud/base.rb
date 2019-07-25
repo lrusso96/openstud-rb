@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Openstud
+  # main class that includes all Openstud services
+  #
+  # @since 0.1.0
   class Base
     include Authenticator
     include Bio

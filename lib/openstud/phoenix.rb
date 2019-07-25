@@ -5,6 +5,9 @@ require 'httparty'
 module Openstud
   ENDPOINT_API = 'https://www.studenti.uniroma1.it/phoenixws'
 
+  # Http utils class that defines Infostud paths
+  #
+  # @since 0.1.0
   class Phoenix
     include HTTParty
 

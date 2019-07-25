@@ -2,6 +2,9 @@
 
 require 'openstud/version'
 
+# Main namespace for openstud-rb gem
+#
+# @since 0.1.0
 module Openstud
   require_relative './openstud/phoenix.rb'
   require_relative './openstud/error.rb'
