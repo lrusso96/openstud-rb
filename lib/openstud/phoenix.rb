@@ -14,7 +14,7 @@ module Openstud
     def initialize(body: {})
       @headers = { 'Content-EventType' => 'application/x-www-form-urlencoded',
                    Accept: 'application/json' }
-      @options = { headers: @headers, body: body}
+      @options = { headers: @headers, body: body }
     end
 
     def login
@@ -22,7 +22,8 @@ module Openstud
     end
 
     def info_student(id, token)
-      easy self.class.get("#{ENDPOINT_API}/studente/#{id}?ingresso=#{token}", @options)
+      easy self.class.get("#{ENDPOINT_API}/studente/#{id}?ingresso=#{token}",
+                          @options)
     end
 
     private
