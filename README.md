@@ -1,8 +1,8 @@
 # Openstud
 
 [![Build Status](https://travis-ci.com/lrusso96/openstud-rb.svg?branch=master)](https://travis-ci.com/lrusso96/openstud-rb)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/449ca48703ccd2488357/maintainability)](https://codeclimate.com/github/lrusso96/openstud-rb/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/449ca48703ccd2488357/test_coverage)](https://codeclimate.com/github/lrusso96/openstud-rb/test_coverage)
 
 ![License: GPL v3](https://img.shields.io/badge/License-MIT-blue.svg)
 
