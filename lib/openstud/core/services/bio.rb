@@ -11,17 +11,14 @@ module Openstud
     include Exceptions
 
     def info_student!
-      begin
-        retries ||= 0
-        p "attempt #{retries}"
-        login! if retries.positive?
-        _info_student!
-      rescue InvalidResponseError => e
-        retry if (retries += 1) <= @max_tries
-        raise e
-      rescue RefreshError => e
-        raise InvalidCredentialsError, e.message
-      end
+      retries ||= 0
+      login! if retries.positive?
+      _info_student!
+    rescue InvalidResponseError => e
+      retry if (retries += 1) <= @max_tries
+      raise e
+    rescue RefreshError => e
+      raise InvalidCredentialsError, e.message
     end
 
     private
@@ -35,9 +32,9 @@ module Openstud
 
     # @param [Hash] response
     def validate_info_student!(response)
-      unless response.key?('ritorno')
-        raise InvalidResponseError, 'I guess the token is no longer valid'
-      end
+      fine = response.key?('ritorno')
+      msg = 'I guess the token is no longer valid'
+      raise InvalidResponseError, msg unless fine
     end
   end
 end
