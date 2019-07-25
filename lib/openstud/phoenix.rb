@@ -22,12 +22,14 @@ module Openstud
     end
 
     def info_student(id, token)
+      p "token: #{token}"
       easy self.class.get("#{ENDPOINT_API}/studente/#{id}?ingresso=#{token}", @options)
     end
 
     private
 
     def easy(res)
+      p res.code
       JSON.parse res.body
     end
   end

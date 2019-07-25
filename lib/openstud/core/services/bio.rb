@@ -11,11 +11,14 @@ module Openstud
     include Exceptions
 
     def info_student!
-      (0..).each do |count|
-        login! if count.positive?
-        return _info_student!
+      begin
+        retries ||= 0
+        p "attempt #{retries}"
+        login! if retries.positive?
+        _info_student!
       rescue InvalidResponseError => e
-        raise e if count == @max_tries
+        retry if (retries += 1) <= @max_tries
+        raise e
       rescue RefreshError => e
         raise InvalidCredentialsError, e.message
       end
@@ -27,7 +30,7 @@ module Openstud
       res = Phoenix.new.info_student(@student_id, @token)
       validate_info_student! res
       # TODO: parse student and return
-      res
+      res['ritorno']['nome']
     end
 
     # @param [Hash] response
