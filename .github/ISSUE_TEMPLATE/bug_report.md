@@ -13,8 +13,8 @@ A clear and concise description of what the bug is.
 **How to reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
-4. See error
-5. (optionally) Add screenshots to help explain your problem.
+2. See error
+3. (optionally) Add screenshots to help explain your problem.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
