@@ -5,7 +5,7 @@ module Openstud
     # @abstract
     class BaseResponseError < BaseError
       err_type :json_error, :maintenance, :rate_limit, :html_error,
-                    :generic
+               :generic
 
       def initialize(msg = nil)
         super(msg)
