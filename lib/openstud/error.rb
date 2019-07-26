@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# @abstract
 class Class
   alias err_type bool_accessor
 end
