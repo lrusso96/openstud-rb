@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+class Class
+  alias err_type bool_accessor
+end
+
 module Openstud
   # Namespace for Openstud errors
   #
@@ -7,19 +11,8 @@ module Openstud
   module Exceptions
     # @abstract class that defines common methods to handle custom error types
     class BaseError < StandardError
-      attr_accessor :types
-
-      def initialize(msg, types: [])
+      def initialize(msg = nil)
         super(msg)
-        @types = types
-        types.each_with_index do |val, i|
-          s = val.to_s
-          self.class.send(:define_method, s + '!') do
-            @types[i] = true
-            self
-          end
-          self.class.send(:define_method, s + '?') { @types[i] }
-        end
       end
     end
 

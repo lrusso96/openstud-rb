@@ -4,7 +4,7 @@ module Openstud
   module Exceptions
     # class for invalid response
     class InvalidResponseError < BaseResponseError
-      def initialize(msg)
+      def initialize(msg = nil)
         super(msg)
       end
     end

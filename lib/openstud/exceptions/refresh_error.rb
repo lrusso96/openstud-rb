@@ -4,7 +4,7 @@ module Openstud
   module Exceptions
     # class for invalid refresh
     class RefreshError < BaseLoginError
-      def initialize(msg)
+      def initialize(msg = nil)
         super(msg)
       end
     end

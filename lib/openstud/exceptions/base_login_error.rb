@@ -4,8 +4,10 @@ module Openstud
   module Exceptions
     # @abstract
     class BaseLoginError < BaseError
-      def initialize(msg)
-        super(msg, types: %i[invalid_password expired_password])
+      err_type :invalid_password, :expired_password
+
+      def initialize(msg = nil)
+        super(msg)
       end
     end
   end
