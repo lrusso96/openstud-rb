@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Authenticator' do
-
   context 'for valid credentials' do
     it 'logins' do
       base = Openstud::Base.new
-      base.student_id =ENV['STUDENT_ID']
+      base.student_id = ENV['STUDENT_ID']
       base.password = ENV['STUDENT_PWD']
       base.login!
       expect(base.token.empty?).to be false
