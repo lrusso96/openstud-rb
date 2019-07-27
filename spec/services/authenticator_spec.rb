@@ -20,7 +20,7 @@ RSpec.describe 'Authenticator' do
   context 'when credentials are invalid' do
     it 'fails to login' do
       base = Openstud::Base.new student_id: '1234567', password: 'password'
-      expect { base.login! }.to raise_error Openstud::Exceptions::RefreshError
+      expect { base.login! }.to raise_error Openstud::Exceptions::InvalidResponseError
     end
 
     it 'fails to get infos' do

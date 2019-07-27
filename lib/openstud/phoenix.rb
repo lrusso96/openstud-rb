@@ -21,9 +21,10 @@ module Openstud
     end
 
     def login
-      easy self.class.post("#{ENDPOINT_API}/autenticazione", @options)
+      self.class.post("#{ENDPOINT_API}/autenticazione", @options).body
     end
 
+    # TODO: return the response, not the parsed body
     def info_student(id, token)
       easy self.class.get("#{ENDPOINT_API}/studente/#{id}?ingresso=#{token}",
                           @options)
@@ -31,6 +32,7 @@ module Openstud
 
     private
 
+    # TODO: remove this to catch exceptions in each module!
     def easy(res)
       JSON.parse res.body
     end

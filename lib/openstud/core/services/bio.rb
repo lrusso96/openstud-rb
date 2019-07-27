@@ -12,7 +12,7 @@ module Openstud
 
     def info_student!
       retries ||= 0
-      login! if retries.positive?
+      refresh_token! if retries.positive?
       _info_student!
     rescue InvalidResponseError => e
       retry if (retries += 1) <= @max_tries
