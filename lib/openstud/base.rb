@@ -18,5 +18,14 @@ module Openstud
       @password = password
       @max_tries = 3
     end
+
+    def valid_password?
+      !@password.empty?
+    end
+
+    def valid_id?
+      /\A\d+\z/.match @student_id
+    end
+
   end
 end
