@@ -26,6 +26,5 @@ module Openstud
     def valid_id?
       /\A\d+\z/.match @student_id
     end
-
   end
 end

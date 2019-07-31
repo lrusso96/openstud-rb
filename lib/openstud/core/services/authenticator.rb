@@ -110,9 +110,10 @@ module Openstud
       @token = response['output']
       raise ResponseError, 'Infostud answer is not valid' unless @token
 
-      return if (x = response['esito']['flagEsito']).zero?
+      x = response['esito']['flagEsito']
+      return if x.zero?
       if x == -4
-      raise UserNotEnabledError, 'User is not enabled to use Infostud service'
+        raise UserNotEnabledError, 'User is not enabled to use Infostud service'
       end
       raise RefreshError.new('Password expired').expired_password! if x == -2
       raise RefreshError, 'Password not valid' if x == -1
