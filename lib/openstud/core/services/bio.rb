@@ -14,11 +14,11 @@ module Openstud
       retries ||= 0
       refresh_token! if retries.positive?
       _info_student!
-    rescue InvalidResponseError => e
+    rescue ResponseError => e
       retry if (retries += 1) <= @max_tries
       raise e
     rescue RefreshError => e
-      raise InvalidCredentialsError, e.message
+      raise CredentialsError, e.message
     end
 
     private
@@ -34,7 +34,7 @@ module Openstud
     def validate_info_student!(response)
       fine = response.key?('ritorno')
       msg = 'I guess the token is no longer valid'
-      raise InvalidResponseError, msg unless fine
+      raise ResponseError, msg unless fine
     end
   end
 end

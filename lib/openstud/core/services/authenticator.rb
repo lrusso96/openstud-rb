@@ -12,7 +12,7 @@ module Openstud
     # Authenticates the current [Base] user, updating its token
     #
     # @raise [RefreshError] for invalid credentials
-    # @raise [InvalidResponseError] for generic server error
+    # @raise [ResponseError] for generic server error
     def refresh_token!
       raise RefreshError, 'Student ID is not valid' unless valid_id?
 
@@ -24,42 +24,47 @@ module Openstud
     # Authenticates the current [Base] user.
     # It tries at most @max_tries times to authenticate.
     #
-    # @raise [InvalidCredentialsError] for invalid credentials
-    # @raise [InvalidResponseError] for generic server error (e.g JSON error)
+    # @raise [CredentialsError] for invalid credentials
+    # @raise [ResponseError] for generic server error (e.g JSON error)
     def login!
-      raise InvalidCredentialsError, 'Password is empty' unless valid_password?
-      raise InvalidCredentialsError, 'Student is not valid' unless valid_id?
-
-      retries ||= 0
-      _login!
-    rescue InvalidResponseError => e
-      retry if (retries += 1) <= @max_tries
-      raise e
+      validate_credentials!
+      begin
+        retries ||= 0
+        try_login!
+      rescue ResponseError => e
+        retry if (retries += 1) <= @max_tries
+        raise e
+      end
     end
 
     private
 
+    # @raise [CredentialsError] for invalid credentials
+    def validate_credentials!
+      raise CredentialsError, 'Password is empty' unless valid_password?
+      raise CredentialsError, 'Student is not valid' unless valid_id?
+    end
+
     # Executes a login request, in order to update the current token
     #
-    # @raise [InvalidResponseError]
+    # @raise [ResponseError]
     def execute_login
       params = { key: 'r4g4zz3tt1', matricola: @student_id,
                  stringaAutenticazione: @password }
       body = Phoenix.new(body: params).login
-      raise InvalidResponseError 'Infostud answer is not valid' unless body
+      raise ResponseError 'Infostud answer is not valid' unless body
 
       if body.include? 'the page you are looking for is currently unavailable'
-        raise InvalidResponseError.new('InfoStud is in maintenance')
-                                  .maintenance!
+        raise ResponseError.new('InfoStud is in maintenance')
+                           .maintenance!
       end
-
       body
     end
 
     # @param [Hash] response: the parsed response
     #
     # @raise [RefreshError] for invalid credentials
-    # @raise [InvalidResponseError] for generic server error
+    # @raise [ResponseError] for generic server error
     def validate_refresh_token!(response)
       @token = response['output']
       x = response['esito']['flagEsito']
@@ -68,32 +73,42 @@ module Openstud
       raise RefreshError.new('Password expired').expired_password! if x == -2
       raise RefreshError, 'Invalid credentials when refreshing token' if x == -1
 
-      raise InvalidResponseError, 'Infostud is not working as intended'
+      raise ResponseError, 'Infostud is not working as intended'
+    end
+
+    # @raise [CredentialsError] for invalid credentials
+    # @raise [ResponseError] for generic server error (e.g JSON error)
+    def try_login!
+      validate_try_login! execute_login
+    rescue JSON::ParserError => e
+      raise ResponseError.new(e.message).json_error!
     end
 
     #
-    # @raise [InvalidCredentialsError] for invalid credentials
-    # @raise [InvalidResponseError] for generic server error (e.g JSON error)
-    def _login!
-      body = execute_login
-      res = JSON.parse body
-      if body.include? 'Matricola errata'
-        raise InvalidCredentialsError, 'Student ID is not valid'
-      end
-
-      validate_login! res
-    rescue JSON::ParserError => e
-      raise InvalidResponseError.new(e.message).json_error!
+    # @param [String] body
+    def validate_try_login!(body)
+      validate_login_body! body
+      validate_login_response! JSON.parse body
     end
 
+    #
+    # @param [String] body
+    # @raise [CredentialsError] if student ID is not valid
+    def validate_login_body!(body)
+      err = 'Matricola errata'
+      msg = 'Student ID is not valid'
+      raise CredentialsError, msg if body.include? err
+    end
+
+    #
     # @param [Hash] response: the parsed response
     #
     # @raise [UserNotEnabledError] for invalid student id
     # @raise [RefreshError] for invalid credentials
-    # @raise [InvalidResponseError] for generic server error
-    def validate_login!(response)
+    # @raise [ResponseError] for generic server error
+    def validate_login_response!(response)
       @token = response['output']
-      raise InvalidResponseError, 'Infostud answer is not valid' unless @token
+      raise ResponseError, 'Infostud answer is not valid' unless @token
 
       return if (x = response['esito']['flagEsito']).zero?
       if x == -4
@@ -102,7 +117,7 @@ module Openstud
       raise RefreshError.new('Password expired').expired_password! if x == -2
       raise RefreshError, 'Password not valid' if x == -1
 
-      raise InvalidResponseError, 'Infostud is not working as intended'
+      raise ResponseError, 'Infostud is not working as intended'
     end
   end
 end

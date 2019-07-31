@@ -9,8 +9,8 @@ RSpec.describe 'Login errors' do
     expect(r.invalid_password?).to be true
   end
 
-  it 'raises InvalidCredentialsError' do
-    r = Openstud::Exceptions::InvalidCredentialsError.new 'Invalid'
+  it 'raises CredentialsError' do
+    r = Openstud::Exceptions::CredentialsError.new 'Invalid'
     expect(r.expired_password?).to be false
     r.expired_password!
     expect(r.expired_password?).to be true

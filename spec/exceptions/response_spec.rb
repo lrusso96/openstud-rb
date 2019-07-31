@@ -2,7 +2,7 @@
 
 RSpec.describe 'Response errors' do
   it 'raises InvalidResponse' do
-    r = Openstud::Exceptions::InvalidResponseError.new('Invalid')
+    r = Openstud::Exceptions::ResponseError.new('Invalid')
     expect(r.json_error?).to be false
     r.json_error!
     expect(r.json_error?).to be true
