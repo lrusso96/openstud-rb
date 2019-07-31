@@ -17,11 +17,13 @@ module Openstud
       end
     end
 
-    require_relative './exceptions/base_login_error.rb'
-    require_relative './exceptions/refresh_error.rb'
-    require_relative './exceptions/credentials_error.rb'
+    require_relative './exceptions/base_login_error'
+    require_relative './exceptions/refresh_error'
+    require_relative './exceptions/credentials_error'
 
-    require_relative './exceptions/base_response_error.rb'
-    require_relative './exceptions/response_error.rb'
+    require_relative './exceptions/base_response_error'
+    require_relative './exceptions/response_error'
+
+    require_relative './exceptions/user_not_enabled_error'
   end
 end

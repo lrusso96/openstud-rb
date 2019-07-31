@@ -88,7 +88,9 @@ module Openstud
     # @param [String] body
     def validate_try_login!(body)
       validate_login_body! body
-      validate_login_response! JSON.parse body
+      res = JSON.parse body
+      validate_login_response! res
+      extract_token! res
     end
 
     #
@@ -107,9 +109,6 @@ module Openstud
     # @raise [RefreshError] for invalid credentials
     # @raise [ResponseError] for generic server error
     def validate_login_response!(response)
-      @token = response['output']
-      raise ResponseError, 'Infostud answer is not valid' unless @token
-
       x = response['esito']['flagEsito']
       return if x.zero?
       if x == -4
@@ -119,6 +118,13 @@ module Openstud
       raise RefreshError, 'Password not valid' if x == -1
 
       raise ResponseError, 'Infostud is not working as intended'
+    end
+
+    #
+    # @param [String] response
+    def extract_token!(response)
+      @token = response['output']
+      raise ResponseError, 'Infostud answer is not valid' unless @token
     end
   end
 end
