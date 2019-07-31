@@ -3,7 +3,7 @@
 module Openstud
   module Exceptions
     # class for invalid refresh
-    class InvalidCredentialsError < BaseLoginError
+    class CredentialsError < BaseLoginError
       def initialize(msg = nil)
         super(msg)
       end
