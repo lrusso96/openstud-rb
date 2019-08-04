@@ -123,8 +123,10 @@ module Openstud
     #
     # @param [String] response
     def extract_token!(response)
-      @token = response['output']
-      raise ResponseError, 'Infostud answer is not valid' unless @token
+      token = response['output']
+      raise ResponseError, 'Infostud answer is not valid' unless token
+
+      @token = token
     end
   end
 end

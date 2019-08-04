@@ -2,6 +2,7 @@
 
 module Openstud
   module Exceptions
+    # class for user not enabled
     class UserNotEnabledError < BaseError
       def initialize(msg = nil)
         super(msg)
