@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'httparty'
 
 module Openstud
   # Namespace for methods that handle bio infos
@@ -25,6 +24,7 @@ module Openstud
 
     # @return [Student]
     def _info_student!
+      # TODO: parse here JSON to catch errors
       res = Phoenix.new.info_student(@student_id, @token)
       validate_info_student! res
       extract_student res
@@ -42,11 +42,11 @@ module Openstud
     def extract_student(response)
       res = response['ritorno']
       st = Student.new
+      st.student_id = @student_id
       # TODO: add proper parser for int fields (e.g. cfu)
       basic_fields.each do |f, k|
         st.send(f.to_s + '=', res[k])
       end
-      st.student_id = @student_id
       st
     end
 
