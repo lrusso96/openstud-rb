@@ -23,11 +23,11 @@ module Openstud
 
     private
 
+    # @return [Student]
     def _info_student!
       res = Phoenix.new.info_student(@student_id, @token)
       validate_info_student! res
-      # TODO: parse student and return
-      res['ritorno']['nome']
+      extract_student res
     end
 
     # @param [Hash] response
@@ -35,6 +35,32 @@ module Openstud
       fine = response.key?('ritorno')
       msg = 'I guess the token is no longer valid'
       raise ResponseError, msg unless fine
+    end
+
+    # @param [Hash] response
+    # @return [Student]
+    def extract_student(response)
+      res = response['ritorno']
+      st = Student.new
+      # TODO: add proper parser for int fields (e.g. cfu)
+      basic_fields.each do |f, k|
+        st.send(f.to_s + '=', res[k])
+      end
+      st.student_id = @student_id
+      st
+    end
+
+    def basic_fields
+      { fiscal_code: 'codiceFiscale', last_name: 'cognome',
+        first_name: 'nome', birth_city: 'comuneDiNasciata',
+        birth_place: 'luogoDiNascita', course_year: 'annoCorso',
+        first_enrollment: 'primaIscr', last_enrollment: 'ultIscr',
+        department_name: 'facolta', course_name: 'nomeCorso',
+        academic_year: 'annoAccaAtt', code_course: 'codCorso',
+        type_student: 'tipoStudente', student_status: 'tipoIscrizione',
+        erasmus: 'isErasmus', nation: 'nazioneNascita', gender: 'sesso',
+        cfu: 'creditiTotali', email: 'indiMailIstituzionale',
+        academic_year_course: 'annoAccaCors', citizenship: 'cittadinanza' }
     end
   end
 end
