@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'openstud-driver, but in Ruby'
   spec.description   = 'a gem that interacts with Sapienza Infostud'
   spec.homepage      = 'https://github.com/lrusso96'
-  spec.license       = 'MIT'
+  spec.license       = 'GPL-3.0'
   # spec.metadata["allowed_push_host"] = 'http://mygemserver.com'
 
   spec.metadata['homepage_uri'] = spec.homepage
